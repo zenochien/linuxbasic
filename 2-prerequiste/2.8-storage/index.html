@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.2">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Storage in Linux ::  Amazon ElastiCache - Redis</title>
+
+    
+    <link href="/css/nucleus.css?1718009105" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1718009105" rel="stylesheet">
+    <link href="/css/hybrid.css?1718009105" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1718009105" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1718009105" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718009105" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1718009105" rel="stylesheet">
+    <link href="/css/theme.css?1718009105" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1718009105" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1718009105" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1718009105"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/2-prerequiste/2.8-storage/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1718009105"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1718009105"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1718009105"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/" title="The Linux Basic Course" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/">
+           <b> 1. </b> The Linux Basic Course
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/" title="Prerequiste" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/2-prerequiste/">
+           <b> 2. </b> Prerequiste
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.1-create-cloud9/" title="Create Cloud9 on AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.1-create-cloud9/">
+           <b> 2.1 </b> Create Cloud9 on AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.2-shell/" title="Working with Shell Basic" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.2-shell/">
+           <b> 2.2 </b> Working with Shell Basic
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.3-linux-core-concepts/" title="Linux Core Concepts" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.3-linux-core-concepts/">
+           <b> 2.3 </b> Linux Core Concepts
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.4-packagemanagement/" title="Package Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.4-packagemanagement/">
+           <b> 2.4 </b> Package Management
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.5-filearchival/" title="File Compression and Archival" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.5-filearchival/">
+           <b> 2.5 </b> File Compression and Archival
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.6-securitypermission/" title="Security and File Permissions" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.6-securitypermission/">
+           <b> 2.6 </b> Security and File Permissions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.7-networking/" title="Netwoking" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.7-networking/">
+           <b> 2.7 </b> Netwoking
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.8-storage/" title="Storage in Linux" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/2-prerequiste/2.8-storage/">
+           <b> 2.8 </b> Storage in Linux
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.9-systemctl/" title="Service Management with SYSTEMD" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.9-systemctl/">
+           <b> 2.9 </b> Service Management with SYSTEMD
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-clean/" title="Clean" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-clean/">
+           <b> 3. </b> Clean
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/2-prerequiste/2.8-storage/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7964899&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>27-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.linkedin.com/in/jotaguy/"  style="color:orange">Gia Hưng  </a> <br>
+                <a href="https://www.linkedin.com/in/vanhoangkha/"  style="color:orange">Hoàng Kha </a>
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Linux in AWS Cloud9</a> > <a href='/2-prerequiste/'>Prerequiste</a> > Storage in Linux
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction-to-storage-basic">Introduction to Storage Basic</a></li>
+        <li><a href="#partition-types--primary-extended-and-logical">PARTITION TYPES – PRIMARY, EXTENDED AND LOGICAL</a></li>
+        <li><a href="#working-with-ext4">Working with Ext4</a></li>
+        <li><a href="#nfs">NFS</a></li>
+        <li><a href="#working-with-logical-volume-manager">Working with Logical Volume Manager</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Storage in Linux
+            </h1>
+          
+
+        
+
+
+
+	<p><img src="/images/2-Prerequiste/8/1.png" alt="Createacloud"></p>
+<h3 id="introduction-to-storage-basic">Introduction to Storage Basic</h3>
+<p><strong>List all Block devices</strong></p>
+<ul>
+<li>
+<p>Block devices are special files that refer to or represent a device (which could be anything from a hard drive to a USB drive). So naturally, there are command line tools that help you with your block devices-related work.</p>
+</li>
+<li>
+<p>Major Number is used to identigy the type of block device, value 8 represent a SCSI device starts with SD.
+<img src="/images/2-Prerequiste/8/2.png" alt="Createacloud"></p>
+</li>
+</ul>
+<ol>
+<li>Minor Number is uset to distuinguish individual, physical or logical devices.</li>
+</ol>
+<pre tabindex="0"><code>$ lsblk 
+</code></pre><pre tabindex="0"><code>$ ls -l /dev/ | grep &#34;^b&#34;
+</code></pre><ol start="2">
+<li>To Print,Create and Delete the parition table use fdisk -l command
+<img src="/images/2-Prerequiste/8/3.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ sudo fdisk -l /dev/sda
+</code></pre><h3 id="partition-types--primary-extended-and-logical">PARTITION TYPES – PRIMARY, EXTENDED AND LOGICAL</h3>
+<ol start="3">
+<li>Createting Partitions</li>
+</ol>
+<pre tabindex="0"><code>$ gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.1
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): ?
+b back up GPT data to a file
+c change a partition&#39;s name
+d delete a partition
+i show detailed information on a partition
+l list known partition types
+n add a new partition
+o create a new empty GUID partition table (GPT)
+p print the partition table
+q quit without saving changes
+r recovery and transformation options (experts only)
+s sort partitions
+t change a partition&#39;s type code
+v verify disk
+w write table to disk and exit
+x extra functionality (experts only)
+? print this menu
+
+Command (? for help): n
+Partition number (1-128, default 1): 1
+First sector (34-41943006, default = 2048) or {+-}size{KMGTP}: 2048
+Information: Moved requested sector from 34 to 2048 in
+order to align on 2048-sector boundaries.
+Use &#39;l&#39; on the experts&#39; menu to adjust alignment
+Last sector (2048-41943006, default = 41943006) or {+-}size{KMGTP}: 41943006
+Current type is &#39;Linux filesystem&#39;
+Hex code or GUID (L to show codes, Enter = 8300):
+Changed type of partition to &#39;Linux filesystem&#39;
+Command (? for help): w
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+Do you want to proceed? (Y/N): Y
+OK; writing new GUID partition table (GPT) to /dev/vdb.
+The operation has completed successfully.
+</code></pre><pre tabindex="0"><code>$ sudo fdisk -l /dev/sdb
+Disk /dev/sdb: 20 GiB, 128035676160 bytes, 250069680 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 7CABF26E-9723-4406-ZEA1-C2B9B6270A23
+Device Start End Sectors Size Type
+/dev/sdb1 2048 41943006 204800 20GB Linux filesystem
+</code></pre><h3 id="working-with-ext4">Working with Ext4</h3>
+<p><img src="/images/2-Prerequiste/8/4.png" alt="Createacloud"></p>
+<ol start="4">
+<li>To create a file system we will make use of /dev/sdb disk, run below command</li>
+</ol>
+<pre tabindex="0"><code>$ mkfs.ext4 /dev/sdb1
+</code></pre><ol start="5">
+<li>Now create a directory to mount the filesystem use below commands</li>
+</ol>
+<pre tabindex="0"><code>$ mkdir /mnt/ext4;
+
+$ mount /dev/sdb1 /mnt/ext4
+</code></pre><ol start="6">
+<li>To verify if the filesystem is mounted use</li>
+</ol>
+<pre tabindex="0"><code>$ mount | grep /dev/sdb1
+
+$ df -hP | grep /dev/sdb1
+</code></pre><h3 id="nfs">NFS</h3>
+<p><img src="/images/2-Prerequiste/8/5.png" alt="Createacloud"></p>
+<ol start="7">
+<li>NFS server maintains an export configuration file at /etc/exports that defines the clients which should be able to access the directories on the server. /etc/exports looks like this
+<img src="/images/2-Prerequiste/8/6.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ /etc/exports
+/software/repos 10.61.35.201 10.61.35.202 10.61.35.203
+</code></pre><ol start="8">
+<li>To exports all the mounts defined in /etc/exports use
+<img src="/images/2-Prerequiste/8/7.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ exportfs -a
+</code></pre><pre tabindex="0"><code>$ exportfs -o 10.61.35.201:/software/repos
+</code></pre><h3 id="working-with-logical-volume-manager">Working with Logical Volume Manager</h3>
+<ol start="9">
+<li>To make use of LVM, install the package LVM .
+<img src="/images/2-Prerequiste/8/8.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ apt-get install lvm2
+</code></pre><ol start="10">
+<li>Use pvcreate command to create a Physical Volume.</li>
+</ol>
+<pre tabindex="0"><code>$ pvcreate /dev/sdb
+Physical volume &#34;/dev/sdb&#34; successfully created
+</code></pre><ol start="11">
+<li>Use vgcreate command to create a Volume Group.</li>
+</ol>
+<pre tabindex="0"><code>$ vgcreate caleston_vg /dev/sdb
+Volume group &#34;caleston_vg&#34; successfully created
+</code></pre><ol start="12">
+<li>Use pvdisplay command to list all the PVs their names, size and the Volume group it is part of.</li>
+</ol>
+<pre tabindex="0"><code>$ pvdisplay
+--- Physical volume ---
+  PV Name /dev/sdb
+  VG Name caleston_vg
+  PV Size 20.00 GiB / not usable 3.00 MiB
+  Allocatable yes
+  PE Size 4.00 MiB
+  Total PE 5119
+  Free PE 5119
+  Allocated PE 0
+  PV UUID iDCXIN-En2h-5ilJ-Yjqv-GcsR-gDfV-zaf66E
+</code></pre><ol start="13">
+<li>Use <code>vgdisplay</code> to see more details of the VG.
+<img src="/images/2-Prerequiste/8/9.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ vgdisplay
+--- Volume group ---
+  VG Name caleston_vg
+  System ID
+  Format lvm2
+  Metadata Areas 1
+  Metadata Sequence No 1
+  VG Access read/write
+  VG Status resizable
+  MAX LV 0
+  Cur LV 0
+  Open LV 0
+  Max PV 0
+  Cur PV 1
+  Act PV 1
+  VG Size 20.00 GiB
+  PE Size 4.00 MiB
+  Total PE 5119
+  Alloc PE / Size 0 / 0
+  Free PE / Size 5119 / 20.00 GiB
+  VG UUID VzmIAn-9cEl5bA-lVtm-wHKX-KQaObR
+</code></pre><ol start="14">
+<li>To create the Logical Volumes, you can use lvcreate command</li>
+</ol>
+<pre tabindex="0"><code>$ lvcreate –L 1G –n vol1 caleston_vg
+Logical volume &#34;vol1&#34; created.
+</code></pre><ol start="15">
+<li>To display the Logical Volumes, you can use lvdisplay command</li>
+</ol>
+<pre tabindex="0"><code>$ lvdisplay
+--- Logical volume ---
+  LV Path /dev/caleston_vg/vol1
+  LV Name vol1
+  VG Name caleston_vg
+  LV UUID LueYC3-VWpE31-UaYk-wjIR-FjAOyL
+  LV Write Access read/write
+  LV Creation host, time master, 2020-03-31 06:26:14
+  LV Status available
+  # open 0
+  LV Size 1.00 GiB
+  Current LE 256
+  Segments 1
+  Allocation inherit
+  Read ahead sectors auto
+  - currently set to 256
+  Block device 252:0
+</code></pre><ol start="16">
+<li>To list the volume, you can use lvs command</li>
+</ol>
+<pre tabindex="0"><code>$ lvs
+ LV VG Attr LSize Pool
+ vol1 caleston_vg -wi-a----- 1.00g
+</code></pre><ol start="17">
+<li>Now to create an filesystem you can use mkfs command</li>
+</ol>
+<pre tabindex="0"><code>$ mkfs.ext4 /dev/caleston_vg/vol1
+</code></pre><ol start="18">
+<li>To mount the filesystem use mount command</li>
+</ol>
+<pre tabindex="0"><code>$ mount –t ext4 /dev/caleston_vg/vol1 /mnt/vol1
+</code></pre><ol start="19">
+<li>Now logical volume is now available for use. Lets resize the filesystem on vol1 while it is mounted. Check the free space available.</li>
+</ol>
+<pre tabindex="0"><code>$ vgs
+VG #PV #LV #SN Attr VSize VFree
+caleston_vg 1 1 0 wz--n- 20.00g 19.00g
+</code></pre><pre tabindex="0"><code>$ lvresize -L +1G -n /dev/caleston_vg/vol1
+Logical volume vol1 successfully resized.
+</code></pre><pre tabindex="0"><code>$ df –hP /mnt/vol1
+Filesystem Size Used Avail Use% Mounted on
+/dev/mapper/caleston_vg-vol1 976M 1.3M 908M 1% /mnt/vol1
+</code></pre><ol start="20">
+<li>Now to resize the file system use resize2fs command.</li>
+</ol>
+<pre tabindex="0"><code>$ resize2fs /dev/caleston_vg/vol1
+resize2fs 1.42.13 (17-May-2015)
+Filesystem at /dev/mapper/caleston_vg-vol1 is mounted on
+/mnt/vol1; on-line resizing required
+old_desc_blocks = 1, new_desc_blocks = 1
+The filesystem on //dev/mapper/caleston_vg-vol1 is now 524288
+(4k) blocks long.
+</code></pre><ol start="21">
+<li>Now run df -hp command to verify the size of the mounted filesystem</li>
+</ol>
+<pre tabindex="0"><code>$ df –hP /mnt/vol1
+Filesystem Size Used Avail Use% Mounted on
+/dev/mapper/caleston_vg-vol1 2.0G 1.6M 1.9G 1% /mnt/vol1
+</code></pre>
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/2-prerequiste/2.7-networking/" title="Netwoking"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/2-prerequiste/2.9-systemctl/" title="Service Management with SYSTEMD" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1718009106"></script>
+    <script src="/js/perfect-scrollbar.min.js?1718009106"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1718009106"></script>
+    <script src="/js/jquery.sticky.js?1718009106"></script>
+    <script src="/js/featherlight.min.js?1718009106"></script>
+    <script src="/js/highlight.pack.js?1718009106"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1718009106"></script>
+    <script src="/js/learn.js?1718009106"></script>
+    <script src="/js/hugo-learn.js?1718009106"></script>
+
+    <link href="/mermaid/mermaid.css?1718009106" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1718009106"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

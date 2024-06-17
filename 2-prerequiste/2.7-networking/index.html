@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.121.2">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Netwoking ::  Amazon ElastiCache - Redis</title>
+
+    
+    <link href="/css/nucleus.css?1718009105" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1718009105" rel="stylesheet">
+    <link href="/css/hybrid.css?1718009105" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1718009105" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1718009105" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718009105" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1718009105" rel="stylesheet">
+    <link href="/css/theme.css?1718009105" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1718009105" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1718009105" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1718009105"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/2-prerequiste/2.7-networking/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1718009105"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1718009105"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1718009105"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/" title="The Linux Basic Course" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/">
+           <b> 1. </b> The Linux Basic Course
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/" title="Prerequiste" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/2-prerequiste/">
+           <b> 2. </b> Prerequiste
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.1-create-cloud9/" title="Create Cloud9 on AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.1-create-cloud9/">
+           <b> 2.1 </b> Create Cloud9 on AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.2-shell/" title="Working with Shell Basic" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.2-shell/">
+           <b> 2.2 </b> Working with Shell Basic
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.3-linux-core-concepts/" title="Linux Core Concepts" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.3-linux-core-concepts/">
+           <b> 2.3 </b> Linux Core Concepts
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.4-packagemanagement/" title="Package Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.4-packagemanagement/">
+           <b> 2.4 </b> Package Management
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.5-filearchival/" title="File Compression and Archival" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.5-filearchival/">
+           <b> 2.5 </b> File Compression and Archival
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.6-securitypermission/" title="Security and File Permissions" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.6-securitypermission/">
+           <b> 2.6 </b> Security and File Permissions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.7-networking/" title="Netwoking" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/2-prerequiste/2.7-networking/">
+           <b> 2.7 </b> Netwoking
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.8-storage/" title="Storage in Linux" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.8-storage/">
+           <b> 2.8 </b> Storage in Linux
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/2.9-systemctl/" title="Service Management with SYSTEMD" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-prerequiste/2.9-systemctl/">
+           <b> 2.9 </b> Service Management with SYSTEMD
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-clean/" title="Clean" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-clean/">
+           <b> 3. </b> Clean
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/2-prerequiste/2.7-networking/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7964899&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>27-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.linkedin.com/in/jotaguy/"  style="color:orange">Gia Hưng  </a> <br>
+                <a href="https://www.linkedin.com/in/vanhoangkha/"  style="color:orange">Hoàng Kha </a>
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Linux in AWS Cloud9</a> > <a href='/2-prerequiste/'>Prerequiste</a> > Netwoking
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ping">Ping</a></li>
+        <li><a href="#name-resolution">Name Resolution</a></li>
+        <li><a href="#dns">DNS</a></li>
+        <li><a href="#domain-names">DOMAIN NAMES</a></li>
+        <li><a href="#record-types">Record Types</a></li>
+        <li><a href="#switching">Switching</a></li>
+        <li><a href="#default-gateway">Default Gateway</a></li>
+        <li><a href="#check-interfaces">Check Interfaces</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Netwoking
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="ping">Ping</h3>
+<p><img src="/images/2-Prerequiste/7/1.png" alt="Createacloud"></p>
+<ol>
+<li>Ping Command is use to check the remote machine is reachable or not.</li>
+</ol>
+<pre tabindex="0"><code>$ ping 192.168.1.11
+Reply from 192.168.1.11: bytes=32 time=4ms TTL=117
+Reply from 192.168.1.11: bytes=32 time=4ms TTL=117
+</code></pre><ol start="2">
+<li>To Ping the remote host with a name instead of IP Address make an entry in /etc/hosts file</li>
+</ol>
+<pre tabindex="0"><code>$ ping db
+ping: unknow host db
+</code></pre><ol start="3">
+<li>To Ping the remote host with a name instead of IP Address make an entry in /etc/hosts file
+<img src="/images/2-Prerequiste/7/2.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ cat &gt;&gt; /etc/hosts
+192.168.1.11 db
+</code></pre><pre tabindex="0"><code>$ ping db
+PING db (192.168.1.11) 56(84) bytes of data.
+64 bytes from db (192.168.1.11): icmp_seq=1 ttl=64 time=0.052 ms
+64 bytes from db (192.168.1.11): icmp_seq=2 ttl=64 time=0.079 ms
+</code></pre><h3 id="name-resolution">Name Resolution</h3>
+<p><img src="/images/2-Prerequiste/7/3.png" alt="Createacloud"></p>
+<p><img src="/images/2-Prerequiste/7/4.png" alt="Createacloud"></p>
+<h3 id="dns">DNS</h3>
+<p>The domain name system is a distributed way to share these name-to-IP associations instead of requiring each computer to synchronize a hosts file. A name server publishes the IP address for a domain and provides a single location to update when an IP changes.</p>
+<p><img src="/images/2-Prerequiste/7/5.png" alt="Createacloud"></p>
+<p><img src="/images/2-Prerequiste/7/6.png" alt="Createacloud"></p>
+<h3 id="domain-names">DOMAIN NAMES</h3>
+<p><img src="/images/2-Prerequiste/7/7.png" alt="Createacloud"></p>
+<p><img src="/images/2-Prerequiste/7/8.png" alt="Createacloud"></p>
+<ul>
+<li>.com - Commerical or General Purpose.</li>
+<li>.net - Network or General Purpose.</li>
+<li>.edu - Education Purpose</li>
+<li>.org - Organizations for non profit organizations etc.</li>
+</ul>
+<h3 id="record-types">Record Types</h3>
+<p><img src="/images/2-Prerequiste/7/9.png" alt="Createacloud"></p>
+<ul>
+<li>A - IP to host names.</li>
+<li>AAAA - Storing ipv6 to hostnames.</li>
+<li>CNAME - Mapping one name to another.</li>
+</ul>
+<ol start="4">
+<li>To test the DNS resolution you can use nslookup command, this will query a hostname from a DNS Server.
+<img src="/images/2-Prerequiste/7/10.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ nslookup www.google.com
+Server: 8.8.8.8
+Address: 8.8.8.8#53
+Non-authoritative answer:
+Name: www.google.com
+Address: 172.217.0.132
+</code></pre><ol start="5">
+<li>Another useful tool to query a hostname from a DNS server is dig which return more detailed information as shown.
+<img src="/images/2-Prerequiste/7/11.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ dig www.google.com
+; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-Ubuntu &lt;&lt;&gt;&gt; www.google.com
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 28065
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;www.google.com. IN A
+;; ANSWER SECTION:
+www.google.com. 245 IN A 64.233.177.103
+www.google.com. 245 IN A 64.233.177.105
+www.google.com. 245 IN A 64.233.177.147
+www.google.com. 245 IN A 64.233.177.106
+www.google.com. 245 IN A 64.233.177.104
+www.google.com. 245 IN A 64.233.177.99
+;; Query time: 5 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Sun Mar 24 04:34:33 UTC 2019
+;; MSG SIZE rcvd: 139
+</code></pre><h3 id="switching">Switching</h3>
+<p><img src="/images/2-Prerequiste/7/12.png" alt="Createacloud"></p>
+<ol start="6">
+<li>To see the interfaces on the hosts use ip link command</li>
+</ol>
+<pre tabindex="0"><code>$ ip link
+eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP mode
+DEFAULT group default qlen 1000
+</code></pre><ol start="7">
+<li>To connect to the switch we use ip addr add command</li>
+</ol>
+<pre tabindex="0"><code>$ ip addr add 192.168.1.10/24 dev eth0
+</code></pre><h3 id="default-gateway">Default Gateway</h3>
+<p><img src="/images/2-Prerequiste/7/13.png" alt="Createacloud">
+<img src="/images/2-Prerequiste/7/14.png" alt="Createacloud">
+<img src="/images/2-Prerequiste/7/15.png" alt="Createacloud"></p>
+<ol start="8">
+<li>To configure a gateway on system B to reach the system on other network run</li>
+</ol>
+<pre tabindex="0"><code>$ ip route add 192.168.1.0/24 via 192.168.2.1
+</code></pre><ol start="9">
+<li>To see the existing routing table configuration run the route command.</li>
+</ol>
+<pre tabindex="0"><code>$ route
+</code></pre><h3 id="check-interfaces">Check Interfaces</h3>
+<p><img src="/images/2-Prerequiste/7/16.png" alt="Createacloud"></p>
+<ol start="10">
+<li>Use the ip link to ensure the primary interface is up.</li>
+</ol>
+<pre tabindex="0"><code>$ ip link
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc
+    noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp1s0f1: &lt;BROADCAST,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc
+    fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 08:97:98:6e:55:4d brd ff:ff:ff:ff:ff:ff
+</code></pre><ol start="11">
+<li>Check if we can resolve the hostname to IP address via nslookup
+<img src="/images/2-Prerequiste/7/17.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ nslookup caleston-repo-01
+Server:      192.168.1.100
+Address:     192.168.1.100 #53
+
+Non-authoritative answer:
+Name: caleston-repo-01
+Address: 192.168.2.5
+</code></pre><ol start="12">
+<li><code>ping</code> to check the connectivity.
+<img src="/images/2-Prerequiste/7/18.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ ping caleston-repo-01
+PING caleston-repo-01 (192.168.2.5) 56(84) bytes of data.
+
+--- localhost ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2034ms
+</code></pre><ol start="13">
+<li><code>traceroute</code> to check the number of hops between the source.
+<img src="/images/2-Prerequiste/7/19.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ traceroute 192.168.2.5
+
+Tracing route to example.com [192.168.2.5]
+over a maximum of 30 hops:
+1 &lt;1 ms &lt;1 ms &lt;1 ms 192.168.1.1
+2 &lt;2 ms &lt;1 ms &lt;1 ms 192.168.2.1
+3 * * * Request timed out.
+</code></pre><ol start="14">
+<li>To check the port status use <code>netstat</code> command and to use it along with port number use below command.
+<img src="/images/2-Prerequiste/7/20.png" alt="Createacloud"></li>
+</ol>
+<pre tabindex="0"><code>$ netstat -an | grep 80 | grep -i LISTEN
+</code></pre>
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/2-prerequiste/2.6-securitypermission/" title="Security and File Permissions"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/2-prerequiste/2.8-storage/" title="Storage in Linux" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1718009106"></script>
+    <script src="/js/perfect-scrollbar.min.js?1718009106"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1718009106"></script>
+    <script src="/js/jquery.sticky.js?1718009106"></script>
+    <script src="/js/featherlight.min.js?1718009106"></script>
+    <script src="/js/highlight.pack.js?1718009106"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1718009106"></script>
+    <script src="/js/learn.js?1718009106"></script>
+    <script src="/js/hugo-learn.js?1718009106"></script>
+
+    <link href="/mermaid/mermaid.css?1718009106" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1718009106"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
