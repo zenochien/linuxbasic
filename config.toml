@@ -1,5 +1,6 @@
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
+baseURL = "https://zenochien.github.io/"
 
 
 # For search functionality
@@ -19,7 +20,7 @@ home = [ "HTML", "RSS", "JSON"]
   
 [Languages]
 [Languages.en]
-title = " Amazon ElastiCache - Redis"
+title = "Linux Basic"
 weight = 1
 languageName = "English"
 
@@ -35,10 +36,10 @@ identifier = "AWS Study Group FB"
 url = "https://www.facebook.com/groups/awsstudygroupfcj"
 weight = 20
 
-[Languages.vi]
-title = "Amazon ElastiCache - Redis"
-weight = 2
-languageName = "Tiếng Việt"
+# [Languages.vi]
+# title = "Amazon ElastiCache - Redis"
+# weight = 2
+# languageName = "Tiếng Việt"
 
 [[Languages.vi.menu.shortcuts]]
 name = "<i class='fab fa-aws'></i> AWS Study Group - Blog"
