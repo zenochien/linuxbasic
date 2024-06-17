@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Package Management on Linux Basic</title>
+    <link>https://zenochien.github.io/linuxbasic/2-prerequiste/2.4-packagemanagement/</link>
+    <description>Recent content in Package Management on Linux Basic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <atom:link href="https://zenochien.github.io/linuxbasic/2-prerequiste/2.4-packagemanagement/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
