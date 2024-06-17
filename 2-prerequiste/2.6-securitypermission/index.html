@@ -12,21 +12,21 @@
     <title>Security and File Permissions :: Linux Basic</title>
 
     
-    <link href="/linuxbasic/css/nucleus.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/fontawesome-all.min.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/hybrid.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/featherlight.min.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/perfect-scrollbar.min.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/auto-complete.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/atom-one-dark-reasonable.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/theme.css?1718616850" rel="stylesheet">
-    <link href="/linuxbasic/css/hugo-theme.css?1718616850" rel="stylesheet">
+    <link href="/linuxbasic/css/nucleus.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/fontawesome-all.min.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/hybrid.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/featherlight.min.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/perfect-scrollbar.min.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/auto-complete.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/atom-one-dark-reasonable.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/theme.css?1718617843" rel="stylesheet">
+    <link href="/linuxbasic/css/hugo-theme.css?1718617843" rel="stylesheet">
     
-    <link href="/linuxbasic/css/theme-workshop.css?1718616850" rel="stylesheet">
+    <link href="/linuxbasic/css/theme-workshop.css?1718617843" rel="stylesheet">
     
     
 
-    <script src="/linuxbasic/js/jquery-3.3.1.min.js?1718616850"></script>
+    <script src="/linuxbasic/js/jquery-3.3.1.min.js?1718617843"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/linuxbasic/js/lunr.min.js?1718616850"></script>
-<script type="text/javascript" src="/linuxbasic/js/auto-complete.js?1718616850"></script>
+<script type="text/javascript" src="/linuxbasic/js/lunr.min.js?1718617843"></script>
+<script type="text/javascript" src="/linuxbasic/js/auto-complete.js?1718617843"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/zenochien.github.io\/linuxbasic\/";
     
 </script>
-<script type="text/javascript" src="/linuxbasic/js/search.js?1718616850"></script>
+<script type="text/javascript" src="/linuxbasic/js/search.js?1718617843"></script>
 
     
   </div>
@@ -108,13 +108,13 @@
  
   
     
-    <li data-nav-id="/linuxbasic/2-prerequiste/" title="Prerequiste" class="dd-item 
+    <li data-nav-id="/linuxbasic/2-prerequiste/" title="prerequiste" class="dd-item 
         parent
         
         
         ">
       <a href="/linuxbasic/2-prerequiste/">
-           <b> 2. </b> Prerequiste
+           <b> 2. </b> prerequiste
           
             <i class="fas fa-check read-icon"></i>
           
@@ -548,7 +548,7 @@
             
           
           
-            <a href='/linuxbasic/'>Linux in AWS Cloud9</a> > <a href='/linuxbasic/2-prerequiste/'>Prerequiste</a> > Security and File Permissions
+            <a href='/linuxbasic/'>Linux in AWS Cloud9</a> > <a href='/linuxbasic/2-prerequiste/'>prerequiste</a> > Security and File Permissions
           
         
           
@@ -605,9 +605,9 @@
 
 
 
-	<p><img src="/images/2-Prerequiste/6/1.png" alt="Createacloud"></p>
+	<p><img src="/images/2-prerequiste/6/1.png" alt="Createacloud"></p>
 <h3 id="linux-account">Linux Account</h3>
-<p><img src="/images/2-Prerequiste/6/3.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/3.png" alt="Createacloud"></p>
 <ol>
 <li>User&rsquo;s informations are stored under /etc/passwd file.</li>
 </ol>
@@ -616,7 +616,7 @@
 <li>Information about groups is stored into /etc/group file.</li>
 </ol>
 <pre tabindex="0"><code>$ cat /etc/group
-</code></pre><p><img src="/images/2-Prerequiste/6/4.png" alt="Createacloud"></p>
+</code></pre><p><img src="/images/2-prerequiste/6/4.png" alt="Createacloud"></p>
 <ol start="3">
 <li>The user also has a GID, the group id they are part of, id command can be use to check these details. for eg:</li>
 </ol>
@@ -627,7 +627,7 @@ uid=1001(ec2-user) gid=1001(ec2-user)groups=1001(ec2-user),1003(developers)
 </ol>
 <pre tabindex="0"><code>$ grep -i ec2-user /etc/passwd
 ec2-user:x:1001:1001::/home/ec2-user:/bin/sh
-</code></pre><p><img src="/images/2-Prerequiste/6/5.png" alt="Createacloud"></p>
+</code></pre><p><img src="/images/2-prerequiste/6/5.png" alt="Createacloud"></p>
 <ol start="5">
 <li>To see the list of users currently logged use who command.</li>
 </ol>
@@ -641,7 +641,7 @@ ec2-user :1 :1 Tue May 12 20:00 still logged in
 sarah :1 :1 Tue May 12 12:00 still running
 reboot system boot 5.3.0-758-gen Mon May 11 13:00 - 19:00 (06:00)
 </code></pre><h3 id="switching-users">Switching users</h3>
-<p><img src="/images/2-Prerequiste/6/6.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/6.png" alt="Createacloud"></p>
 <ol start="7">
 <li>To switch to any user use su command.</li>
 </ol>
@@ -660,7 +660,7 @@ root
 </ol>
 <pre tabindex="0"><code>[ec2-user@ubuntu-server ~]$ sudo apt-get install nginx
 [sudo] password for ec2-user:
-</code></pre><p><img src="/images/2-Prerequiste/6/7.png" alt="Createacloud"></p>
+</code></pre><p><img src="/images/2-prerequiste/6/7.png" alt="Createacloud"></p>
 <ol start="10">
 <li>Users listed in /etc/sudoers file can make use of sudo command for privledge escalation.</li>
 </ol>
@@ -671,7 +671,7 @@ root
 <pre tabindex="0"><code>$ grep -i ^root /etc/passwd
 /root:x:0:0:root:/root:/usr/sbin/nologin
 </code></pre><h3 id="user-add">User Add</h3>
-<p><img src="/images/2-Prerequiste/6/8.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/8.png" alt="Createacloud"></p>
 <ol start="12">
 <li>To create a new local user bob in the system use useradd command.</li>
 </ol>
@@ -679,10 +679,6 @@ root
 </code></pre><ol start="13">
 <li>To get more details about bob account like, home director, uid, and shell use /etc/passwd</li>
 </ol>
-
-<div class="notices tip" ><p>Amazon Linux, including Amazon Linux 2 and Amazon Linux AMI, does not support the apt-get package manager as it is based on RPM (Red Hat Package Manager) systems rather than Debian systems which use <code>apt-get</code>. Instead, Amazon Linux uses <code>yum</code> or <code>dnf</code> for package management.</p>
-</div>
-
 <pre tabindex="0"><code>$ grep -i bob /etc/passwd
 bob:x:1002:1002::/home/bob:/bin/sh
 </code></pre><ol start="14">
@@ -705,7 +701,7 @@ Retype new UNIX password:
 passwd: all authentication tokens updated
 successfully.
 </code></pre><h3 id="managing-users">Managing Users</h3>
-<p><img src="/images/2-Prerequiste/6/9.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/9.png" alt="Createacloud"></p>
 <ol start="17">
 <li>useradd command be used along with many attributes as show below.</li>
 </ol>
@@ -713,7 +709,7 @@ successfully.
 $ id bob
 $ grep -i bob /etc/passwd
 </code></pre><h3 id="access-control-files">ACCESS CONTROL FILES</h3>
-<p><img src="/images/2-Prerequiste/6/10.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/10.png" alt="Createacloud"></p>
 <ol start="18">
 <li>To get more details about one&rsquo;s account for example bob account, home director, uid, and shell check /etc/passwd</li>
 </ol>
@@ -737,10 +733,10 @@ developer:x:1001:bob,ec2-user
 
 NAME:PASSWORD:GID:MEMBERS
 </code></pre><h3 id="linux-file-permissions">LINUX FILE PERMISSIONS</h3>
-<p><img src="/images/2-Prerequiste/6/11.png" alt="Createacloud"></p>
-<p><img src="/images/2-Prerequiste/6/12.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/11.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/12.png" alt="Createacloud"></p>
 <h3 id="directory-permission">Directory Permission</h3>
-<p><img src="/images/2-Prerequiste/6/13.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/13.png" alt="Createacloud"></p>
 <ol start="21">
 <li>To list the directory permission use</li>
 </ol>
@@ -754,7 +750,7 @@ NAME:PASSWORD:GID:MEMBERS
 </ol>
 <pre tabindex="0"><code>$ cd /home/bob/random_dir
 </code></pre><h3 id="modifying-file-permissions">Modifying file permissions</h3>
-<p><img src="/images/2-Prerequiste/6/14.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/14.png" alt="Createacloud"></p>
 <p><strong>Use <code>chmod</code> command to modify the file permissions.</strong></p>
 <ol start="24">
 <li>Provide full access to owners</li>
@@ -773,7 +769,7 @@ NAME:PASSWORD:GID:MEMBERS
 </ol>
 <pre tabindex="0"><code>$ chmod u+rwx,g+r-x,o-rwx test-file
 </code></pre><h3 id="chomd-permission-file">Chomd Permission File</h3>
-<p><img src="/images/2-Prerequiste/6/15.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/15.png" alt="Createacloud"></p>
 <ol start="28">
 <li>Provide full access to Owners, group and others</li>
 </ol>
@@ -791,7 +787,7 @@ NAME:PASSWORD:GID:MEMBERS
 </ol>
 <pre tabindex="0"><code>$ chmod 750 test-file
 </code></pre><h3 id="change-ownership">Change Ownership</h3>
-<p><img src="/images/2-Prerequiste/6/16.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/16.png" alt="Createacloud"></p>
 <ol start="32">
 <li>Changes owner to bob and group to developer</li>
 </ol>
@@ -805,7 +801,7 @@ NAME:PASSWORD:GID:MEMBERS
 </ol>
 <pre tabindex="0"><code>$ chgrp android test-file
 </code></pre><h3 id="ssh">SSH</h3>
-<p><img src="/images/2-Prerequiste/6/17.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/17.png" alt="Createacloud"></p>
 <ol start="35">
 <li>To login to the remote server use ssh command with hostname or IP address.</li>
 </ol>
@@ -819,7 +815,7 @@ NAME:PASSWORD:GID:MEMBERS
 </ol>
 <pre tabindex="0"><code>ssh –l &lt;user&gt; &lt;hostname OR IP Address&gt;
 </code></pre><h3 id="password-less-authentication">Password-Less Authentication</h3>
-<p><img src="/images/2-Prerequiste/6/18.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/18.png" alt="Createacloud"></p>
 <ol start="38">
 <li>To generate a keypair on the Client run this command</li>
 </ol>
@@ -831,7 +827,7 @@ NAME:PASSWORD:GID:MEMBERS
 
 Private Key: /home/bob/.ssh/id_rsa
 </code></pre><h3 id="scp">SCP</h3>
-<p><img src="/images/2-Prerequiste/6/19.png" alt="Createacloud"></p>
+<p><img src="/images/2-prerequiste/6/19.png" alt="Createacloud"></p>
 <ol start="40">
 <li>To copy a compresses file to a remote server</li>
 </ol>
@@ -1102,19 +1098,19 @@ Private Key: /home/bob/.ssh/id_rsa
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/linuxbasic/js/clipboard.min.js?1718616851"></script>
-    <script src="/linuxbasic/js/perfect-scrollbar.min.js?1718616851"></script>
-    <script src="/linuxbasic/js/perfect-scrollbar.jquery.min.js?1718616851"></script>
-    <script src="/linuxbasic/js/jquery.sticky.js?1718616851"></script>
-    <script src="/linuxbasic/js/featherlight.min.js?1718616851"></script>
-    <script src="/linuxbasic/js/highlight.pack.js?1718616851"></script>
+    <script src="/linuxbasic/js/clipboard.min.js?1718617843"></script>
+    <script src="/linuxbasic/js/perfect-scrollbar.min.js?1718617843"></script>
+    <script src="/linuxbasic/js/perfect-scrollbar.jquery.min.js?1718617843"></script>
+    <script src="/linuxbasic/js/jquery.sticky.js?1718617843"></script>
+    <script src="/linuxbasic/js/featherlight.min.js?1718617843"></script>
+    <script src="/linuxbasic/js/highlight.pack.js?1718617843"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/linuxbasic/js/modernizr.custom-3.6.0.js?1718616851"></script>
-    <script src="/linuxbasic/js/learn.js?1718616851"></script>
-    <script src="/linuxbasic/js/hugo-learn.js?1718616851"></script>
+    <script src="/linuxbasic/js/modernizr.custom-3.6.0.js?1718617843"></script>
+    <script src="/linuxbasic/js/learn.js?1718617843"></script>
+    <script src="/linuxbasic/js/hugo-learn.js?1718617843"></script>
 
-    <link href="/linuxbasic/mermaid/mermaid.css?1718616851" rel="stylesheet" />
-    <script src="/linuxbasic/mermaid/mermaid.js?1718616851"></script>
+    <link href="/linuxbasic/mermaid/mermaid.css?1718617843" rel="stylesheet" />
+    <script src="/linuxbasic/mermaid/mermaid.js?1718617843"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
